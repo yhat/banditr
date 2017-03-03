@@ -1,0 +1,9 @@
+Package: banditr
+Title: R Client for the Bandit API
+Version: 0.0.1
+Authors@R: person("Greg", "Lamp", email = "dev@yhathq.com", role = c("aut", "cre"))
+Description: Run and schedule jobs, stream metrics and data, and control your Bandit account.
+Depends: R (>= 3.3.0)
+License: FreeBSD
+Encoding: UTF-8
+LazyData: true
