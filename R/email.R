@@ -7,10 +7,10 @@ email = function(recipients, subject, body) {
   filename <- '/tmp/email.json'
   data <- list()
   data$recipients <- recipients
-  data$subject <- unbox(subject)
-  data$body <- unbox(body)
+  data$subject <- jsonlite::unbox(subject)
+  data$body <- jsonlite::unbox(body)
   data$attachments <- list()
-  data$isHTML <- unbox(TRUE)
+  data$isHTML <- jsonlite::unbox(TRUE)
 
   write(jsonlite::toJSON(data), filename)
 }
@@ -40,17 +40,17 @@ add_attachment = function(filepath) {
 
   data <- jsonlite::fromJSON(rawJSON, simplifyDataFrame=FALSE)
   data$recipients <- data$recipients
-  data$subject <- unbox(data$subject)
-  data$body <- unbox(data$body)
-  data$isHTML <- unbox(data$isHTML)
+  data$subject <- jsonlite::unbox(data$subject)
+  data$body <- jsonlite::unbox(data$body)
+  data$isHTML <- jsonlite::unbox(data$isHTML)
   data$attachments <- unbox.all(data$attachments)
 
   content <- readLines(filepath)
   content.base64 <- openssl::base64_encode(content)
   attachment <- list(
-    type=unbox(mime::guess_type(filepath)),
-    name=unbox(basename(filepath)),
-    content=unbox(content.base64)
+    type=jsonlite::unbox(mime::guess_type(filepath)),
+    name=jsonlite::unbox(basename(filepath)),
+    content=jsonlite::unbox(content.base64)
   )
   data$attachments[[length(data$attachments) + 1]] <- attachment
   write(jsonlite::toJSON(data), filename)
