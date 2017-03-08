@@ -2,6 +2,7 @@
 
 export(add_attachment)
 export(email)
+export(get_connection)
 export(metadata)
 export(run)
 export(stream)
