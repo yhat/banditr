@@ -44,7 +44,7 @@ add_attachment = function(filepath) {
   if(! file.exists(filename)) {
     rawJSON <- '{}'
   } else {
-    rawJSON <- readLines(filename)
+    rawJSON <- paste0(readLines(filepath), collapse="\n")
   }
 
   data <- jsonlite::fromJSON(rawJSON, simplifyDataFrame=FALSE)
