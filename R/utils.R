@@ -1,3 +1,15 @@
+#' Get a pre-defined database connection from Bandit.
+#'
+#' @export
+#' @param name Name of the database you'd like to get the connection for.
+#' @return Database connection string.
+#' @examples
+#' get_connection('mysql-prod')
+#' get_connection('dw')
+get_connection = function(name) {
+  Sys.getenv(paste0('DATABASE_', name))
+}
+
 get_credentials = function() {
   list(
     username=Sys.getenv('BANDIT_CLIENT_USERNAME'),
