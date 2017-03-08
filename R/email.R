@@ -1,7 +1,17 @@
-library(jsonlite)
-library(mime)
-library(openssl)
-
+#' Create an email to send after your job has finished. Bandit will
+#' automatically send this email for you.
+#'
+#' @export
+#' @param recipients Character vector of email addresses.
+#' @param subject Subject line of the email.
+#' @param body Body of the email. Can be raw text or HTML. This needs to be an
+#' atomic character vector (length 1).
+#' @examples
+#' \dontrun{
+#' email("hi@yhat.com", "This is my Subject", "And you're seeing this body!")
+#' email(c("paul@yhathq.com", "hi@yhat.com"), "Two People", "Will get this!")
+#' email(c("smug@smugdouglas.com"), "HTML", "<p>Wow! HTML is <b>fun!</b></p>")
+#' }
 email = function(recipients, subject, body) {
   filename <- '/job/metadata/email.json'
   filename <- '/tmp/email.json'
@@ -15,20 +25,17 @@ email = function(recipients, subject, body) {
   write(jsonlite::toJSON(data), filename)
 }
 
-email("hi@yhat.com", "bye", "foo bar baz")
-email(c("paul@yhathq.com", "hi@yhat.com"), "bye", "foo bar baz")
-
-
-unbox.all = function(myList) {
-  if (length(myList)==0) {
-    return (myList)
-  }
-  for(i in 1:length(myList)) {
-    myList[[i]] <- lapply(myList[[i]], unbox)
-  }
-  myList
-}
-
+#' Add an attachment to your email. This can be any filetype.
+#'
+#' @export
+#' @param filepath Path to the file you'd like to attach. *Note* that this will
+#' be the filepath *in your bandit job!*.
+#' @examples
+#' \dontrun{
+#' add_attachment("my-plot.png")
+#' add_attachment("train.csv")
+#' add_attachment("scored-data.csv")
+#' }
 add_attachment = function(filepath) {
   filename <- '/job/metadata/email.json'
   filename <- '/tmp/email.json'
@@ -43,7 +50,7 @@ add_attachment = function(filepath) {
   data$subject <- jsonlite::unbox(data$subject)
   data$body <- jsonlite::unbox(data$body)
   data$isHTML <- jsonlite::unbox(data$isHTML)
-  data$attachments <- unbox.all(data$attachments)
+  data$attachments <- unbox_all(data$attachments)
 
   content <- readLines(filepath)
   content.base64 <- openssl::base64_encode(content)
@@ -55,7 +62,3 @@ add_attachment = function(filepath) {
   data$attachments[[length(data$attachments) + 1]] <- attachment
   write(jsonlite::toJSON(data), filename)
 }
-
-add_attachment("./test.json")
-add_attachment("./test.json")
-add_attachment("./test.json")
