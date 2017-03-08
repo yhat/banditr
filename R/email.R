@@ -14,7 +14,6 @@
 #' }
 email = function(recipients, subject, body) {
   filename <- '/job/metadata/email.json'
-  filename <- '/tmp/email.json'
   data <- list()
   data$recipients <- recipients
   data$subject <- jsonlite::unbox(subject)
@@ -42,7 +41,6 @@ email = function(recipients, subject, body) {
 #' }
 add_attachment = function(filepath) {
   filename <- '/job/metadata/email.json'
-  filename <- '/tmp/email.json'
   if(! file.exists(filename)) {
     rawJSON <- '{}'
   } else {

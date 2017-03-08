@@ -39,6 +39,3 @@ stream = function(tag, value) {
     httr::add_headers("Content-Type"="application/json")
   )
 }
-
-# stream('x', 100)
-# stream('x', 'boo')

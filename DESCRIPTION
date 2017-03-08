@@ -1,7 +1,7 @@
 Package: banditr
 Type: Package
 Title: R Client for the Bandit API
-Version: 0.0.1
+Version: 0.0.2
 Date: 2017-03-08
 Authors@R: person("Greg", "Lamp", email = "dev@yhathq.com", role = c("aut", "cre"))
 Description: Run and schedule jobs, stream metrics and data, and control your Bandit account.

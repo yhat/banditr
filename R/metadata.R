@@ -12,7 +12,6 @@
 #' }
 metadata = function(key, value) {
   filename <- '/job/metadata/metadata.json'
-  filename <- '/tmp/metadata.json'
   if(! file.exists(filename)) {
     rawJSON <- '{}'
   } else {
