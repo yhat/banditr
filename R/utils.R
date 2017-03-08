@@ -11,10 +11,13 @@ get_connection = function(name) {
 }
 
 get_credentials = function() {
+  url <- Sys.getenv('BANDIT_CLIENT_URL')
+  # remove trailing '/'
+  url <- gsub('/$', '', url)
   list(
     username=Sys.getenv('BANDIT_CLIENT_USERNAME'),
     apikey=Sys.getenv('BANDIT_CLIENT_APIKEY'),
-    url=Sys.getenv('BANDIT_CLIENT_URL')
+    url=url
   )
 }
 
