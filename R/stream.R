@@ -27,6 +27,11 @@ stream = function(tag, value) {
     y=jsonlite::unbox(value)
   )
 
+  if (is_local()) {
+    print(jsonlite::toJSON(data))
+    return (list(status=jsonlite::unbox("OK"), message=jsonlite::unbox("DRY RUN")))
+  }
+
   httr::PUT(
     url,
     body = jsonlite::toJSON(data),

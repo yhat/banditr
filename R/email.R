@@ -22,6 +22,10 @@ email = function(recipients, subject, body) {
   data$attachments <- list()
   data$isHTML <- jsonlite::unbox(TRUE)
 
+  if (is_local()) {
+    print(jsonlite::toJSON(data, auto_unbox=TRUE))
+    return
+  }
   write(jsonlite::toJSON(data), filename)
 }
 
@@ -60,5 +64,9 @@ add_attachment = function(filepath) {
     content=jsonlite::unbox(content.base64)
   )
   data$attachments[[length(data$attachments) + 1]] <- attachment
+  if (is_local()) {
+    print(jsonlite::toJSON(data, auto_unbox=TRUE))
+    return
+  }
   write(jsonlite::toJSON(data), filename)
 }

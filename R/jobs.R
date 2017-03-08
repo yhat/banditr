@@ -14,6 +14,10 @@ run = function(project, jobname) {
  creds <- get_credentials()
  job_id <- Sys.getenv('BANDIT_JOB_ID')
  url <- paste(creds$url, 'api', creds$username, project, 'jobs', jobname, sep='/')
+ if (is_local()) {
+   print(url)
+   return (list(status=jsonlite::unbox("OK"), message=jsonlite::unbox("DRY RUN")))
+ }
  httr::GET(
    url,
    httr::authenticate(creds$username, creds$apikey, 'basic')

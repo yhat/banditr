@@ -20,5 +20,10 @@ metadata = function(key, value) {
   }
   data <- jsonlite::fromJSON(rawJSON)
   data[[key]] <- value
+
+  if (is_local()) {
+    print(jsonlite::toJSON(data, auto_unbox=TRUE))
+    return
+  }
   write(jsonlite::toJSON(data, auto_unbox=TRUE), filename)
 }
