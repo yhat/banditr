@@ -12,7 +12,7 @@ Bandit R client.
 
 ## Usage
 `banditr` comes with baked-in documentation. Simply put a `?` before any 
-`banditr function to get documentation on how to use it.
+`banditr` function to get documentation on how to use it.
 
 ```R
 > library(banditr)
